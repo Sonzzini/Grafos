@@ -15,5 +15,7 @@ g.insereA(2,1)
 g.insereA(2,3)
 g.insereA(1,3)
 # mostra o grafo preenchido
+g.inDegree(1)
+
 g.show()
 g.showMin()

@@ -4,6 +4,8 @@ Created on Mon Feb 13 13:59:10 2023
 
 @author: icalc
 """
+from Atividades.atv1 import inDegree as atvInDegree
+
 class Grafo:
     TAM_MAX_DEFAULT = 100
 
@@ -46,6 +48,11 @@ class Grafo:
                     print(" 0 ", end="")
             print("\n")
         print("\nfim da impressao do grafo." )
+
+    def inDegree(self, v) -> int:
+        degree = atvInDegree(v, self.adj)
+        print(f"Grau de {v}: {degree}")
+        return degree
 
 # class Grafo:
 #     TAM_MAX_DEFAULT = 100 # qtde de vértices máxima default
