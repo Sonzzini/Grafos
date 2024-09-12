@@ -18,5 +18,7 @@ g.insereA(1,3)
 g.inDegree(1)
 g.outDegree(1)
 
+g.fonte(1)
+
 g.show()
 g.showMin()

@@ -6,6 +6,8 @@ Created on Mon Feb 13 13:59:10 2023
 """
 from Atividades.atv1 import inDegree as atvInDegree
 from Atividades.atv1 import outDegree as atvOutDegree
+from Atividades.atv1 import fonte as atvFonte
+from Atividades.atv1 import sorvedouro as atvSorvedouro
 
 class Grafo:
     TAM_MAX_DEFAULT = 100
@@ -59,7 +61,16 @@ class Grafo:
         degree = atvOutDegree(v, self.adj)
         print(f"Grau de saída de {v}: {degree}")
         return degree
-
+    
+    def fonte(self, v) -> int:
+        fonte = atvFonte(v, self.adj)
+        print(f"Vértice {v} == fonte: {fonte}")
+        return fonte
+    
+    def sorvedouro(self, v) -> int:
+        s = atvSorvedouro(v, self.adj)
+        print(f"Vértice {v} == sorvedouro: {s}")
+        return s
 # class Grafo:
 #     TAM_MAX_DEFAULT = 100 # qtde de vértices máxima default
 #     # construtor da classe grafo
