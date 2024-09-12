@@ -3,3 +3,6 @@ def inDegree(v, adj) -> int:
     for row in range(len(adj)):
         degree += adj[row][v]
     return degree
+
+def outDegree(v, adj) -> int:
+    return sum(adj[v])

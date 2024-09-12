@@ -5,6 +5,7 @@ Created on Mon Feb 13 13:59:10 2023
 @author: icalc
 """
 from Atividades.atv1 import inDegree as atvInDegree
+from Atividades.atv1 import outDegree as atvOutDegree
 
 class Grafo:
     TAM_MAX_DEFAULT = 100
@@ -51,7 +52,12 @@ class Grafo:
 
     def inDegree(self, v) -> int:
         degree = atvInDegree(v, self.adj)
-        print(f"Grau de {v}: {degree}")
+        print(f"Grau de entrada {v}: {degree}")
+        return degree
+    
+    def outDegree(self, v) -> int:
+        degree = atvOutDegree(v, self.adj)
+        print(f"Grau de saída de {v}: {degree}")
         return degree
 
 # class Grafo:
