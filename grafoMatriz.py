@@ -8,6 +8,8 @@ from Atividades.atv1 import inDegree as atvInDegree
 from Atividades.atv1 import outDegree as atvOutDegree
 from Atividades.atv1 import fonte as atvFonte
 from Atividades.atv1 import sorvedouro as atvSorvedouro
+from Atividades.atv1 import isSymmetric as atvIsSymmetric
+from Atividades.atv1 import createGraphFromFile as atvCreateGraphFromFile
 
 class Grafo:
     TAM_MAX_DEFAULT = 100
@@ -71,6 +73,14 @@ class Grafo:
         s = atvSorvedouro(v, self.adj)
         print(f"Vértice {v} == sorvedouro: {s}")
         return s
+    
+    def isSymmetric(self) -> int:
+        return atvIsSymmetric(self.adj)
+    
+    def createGraphFromFile(self, filename):
+        atvCreateGraphFromFile(self, filename)
+        self.showMin()
+
 # class Grafo:
 #     TAM_MAX_DEFAULT = 100 # qtde de vértices máxima default
 #     # construtor da classe grafo
@@ -86,7 +96,7 @@ class Grafo:
 #         if self.adj[v][w] == 0:
 #             self.adj[v][w] = 1
 #             self.m+=1 # atualiza qtd arestas
-    
+
 #     # remove uma aresta v->w do Grafo	
 #     def removeA(self, v, w):
 #         # testa se temos a aresta
