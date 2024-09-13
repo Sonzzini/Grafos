@@ -4,6 +4,12 @@ Created on Mon Feb 13 13:59:10 2023
 
 @author: icalc
 """
+import sys
+import os
+
+# Adiciona o diretório pai ao sys.path
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 from Atividades.atv1 import inDegree as atvInDegree
 from Atividades.atv1 import outDegree as atvOutDegree
 from Atividades.atv1 import fonte as atvFonte
@@ -29,6 +35,28 @@ class Grafo:
         if self.adj[v][w] == 1:
             self.adj[v][w] = 0
             self.m -= 1
+
+    # Remove um vértice v e todas as arestas associadas
+    def removeV(self, v):
+        # Remover todas as arestas de entrada e saída relacionadas ao vértice v
+        for i in range(self.n):
+            if self.adj[i][v] == 1:  # Verifica se há uma aresta de entrada
+                self.adj[i][v] = 0
+                self.m -= 1
+            if self.adj[v][i] == 1:  # Verifica se há uma aresta de saída
+                self.adj[v][i] = 0
+                self.m -= 1
+
+        # Remover a linha correspondente ao vértice v
+        self.adj.pop(v)
+
+        # Remover a coluna correspondente ao vértice v em todas as outras linhas
+        for i in range(self.n - 1):
+            self.adj[i].pop(v)
+
+        # Atualizar o número de vértices
+        self.n -= 1
+
     
     def show(self):
         print(f"\n n: {self.n:2d} ", end="")
@@ -80,59 +108,3 @@ class Grafo:
     def createGraphFromFile(self, filename):
         atvCreateGraphFromFile(self, filename)
         self.showMin()
-
-# class Grafo:
-#     TAM_MAX_DEFAULT = 100 # qtde de vértices máxima default
-#     # construtor da classe grafo
-#     def __init__(self, n=TAM_MAX_DEFAULT):
-#         self.n = n # número de vértices
-#         self.m = 0 # número de arestas
-#         # matriz de adjacência
-#         self.adj = [[0 for i in range(n)] for j in range(n)]
-
-# 	# Insere uma aresta no Grafo tal que
-# 	# v é adjacente a w
-#     def insereA(self, v, w):
-#         if self.adj[v][w] == 0:
-#             self.adj[v][w] = 1
-#             self.m+=1 # atualiza qtd arestas
-
-#     # remove uma aresta v->w do Grafo	
-#     def removeA(self, v, w):
-#         # testa se temos a aresta
-# 	    if self.adj[v][w] == 1:
-# 	        self.adj[v][w] = 0
-#             self.m-=1; # atualiza qtd arestas
-
-# 	# Apresenta o Grafo contendo
-# 	# número de vértices, arestas
-# 	# e a matriz de adjacência obtida	
-#     def show(self):
-#         print(f"\n n: {self.n:2d} ", end="")
-#         print(f"m: {self.m:2d}\n")
-#         for i in range(self.n):
-#             for w in range(self.n):
-#                 if self.adj[i][w] == 1:
-#                     print(f"Adj[{i:2d},{w:2d}] = 1 ", end="") 
-#                 else:
-#                     print(f"Adj[{i:2d},{w:2d}] = 0 ", end="")
-#             print("\n")
-#         print("\nfim da impressao do grafo." )
-
-
-# 	# Apresenta o Grafo contendo
-# 	# número de vértices, arestas
-# 	# e a matriz de adjacência obtida 
-#     # Apresentando apenas os valores 0 ou 1	
-#     def showMin(self):
-#         print(f"\n n: {self.n:2d} ", end="")
-#         print(f"m: {self.m:2d}\n")
-#         for i in range(self.n):
-#             for w in range(self.n):
-#                 if self.adj[i][w] == 1:
-#                     print(" 1 ", end="") 
-#                 else:
-#                     print(" 0 ", end="")
-#             print("\n")
-#         print("\nfim da impressao do grafo." )
-    

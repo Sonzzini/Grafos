@@ -19,6 +19,24 @@ class GrafoND:
             self.adj[v][w] = None
             self.adj[w][v] = None
             self.m -= 1
+    
+    def removeV(self, v):
+        if v >= self.n: 
+            print(f'Vértice {v} não está no grafo!\nVocê quis dizer vértice {v} - 1 = {v-1}?')
+            return
+        
+        for i in range(self.n):
+            if self.adj[i][v] is not None and self.adj[v][i] is not None:
+                self.adj[i][v] = None
+                self.adj[v][i] = None
+                self.m -= 1
+
+        self.adj.pop(v)
+
+        for i in range(self.n - 1):
+            if v < len(self.adj[i]):
+                self.adj[i].pop(v)
+        self.n -= 1
 
     def show(self):
         print('-' * 50)
