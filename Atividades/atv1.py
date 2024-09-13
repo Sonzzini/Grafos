@@ -29,7 +29,7 @@ def isSymmetric(adj) -> int:
     return int(np.array_equal(adj_np, adj_np.T))
 
 def createGraphFromFile(g, filename) -> List[List[int]]:
-    import grafoMatriz
+    import GrafoMatriz.grafoMatriz
 
     with open(filename, 'r') as file:
         conteudo = file.readlines()
