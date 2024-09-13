@@ -15,12 +15,15 @@ g.insereA(2,1)
 g.insereA(2,3)
 g.insereA(1,3)
 # mostra o grafo preenchido
-g.inDegree(1)
-g.outDegree(1)
+# g.inDegree(1)
+# g.outDegree(1)
 
-g.fonte(1)
-
-g.show()
+# g.fonte(1)
 g.showMin()
 
-g.createGraphFromFile('instructions.txt')
+g.removeV(0)
+
+# g.show()
+g.showMin()
+
+# g.createGraphFromFile('instructions.txt')
