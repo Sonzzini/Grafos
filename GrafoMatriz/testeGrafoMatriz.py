@@ -22,3 +22,5 @@ g.fonte(1)
 
 g.show()
 g.showMin()
+
+g.createGraphFromFile('instructions.txt')
