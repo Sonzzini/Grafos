@@ -27,3 +27,4 @@ g.removeV(0)
 g.showMin()
 
 # g.createGraphFromFile('instructions.txt')
+g.isComplete()
