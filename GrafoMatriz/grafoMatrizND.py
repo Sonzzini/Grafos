@@ -1,3 +1,11 @@
+
+import sys
+import os
+
+# Adiciona o diretório pai ao sys.path
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+from Atividades.atv1 import ND_isComplete as atvIsComplete
 class GrafoND:
     TAM_MAX_DEFAULT = 100
 
@@ -67,3 +75,8 @@ class GrafoND:
             print("\n")
         print("\nfim da impressao do grafo." )
         print('-' * 50)
+
+    def isComplete(self) -> bool:
+        is_complete = atvIsComplete(self)
+        print(f"Grafo == complete: {is_complete}")
+        return is_complete

@@ -48,3 +48,14 @@ def createGraphFromFile(g, filename) -> List[List[int]]:
             x, y = map(int, linha.split())
             g.insereA(x, y)
 
+def ND_isComplete(g) -> bool:
+    for i in range(g.n):
+        if None in g.adj[i][:i] + g.adj[i][i+1:]:
+            return False
+    return True
+
+def D_isComplete(g) -> bool:
+    for i in range(g.n):
+        if 0 in g.adj[i][:i] + g.adj[i][i+1:]:
+            return False
+    return True

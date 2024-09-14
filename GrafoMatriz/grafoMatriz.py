@@ -16,6 +16,7 @@ from Atividades.atv1 import fonte as atvFonte
 from Atividades.atv1 import sorvedouro as atvSorvedouro
 from Atividades.atv1 import isSymmetric as atvIsSymmetric
 from Atividades.atv1 import createGraphFromFile as atvCreateGraphFromFile
+from Atividades.atv1 import D_isComplete as atvIsComplete
 
 class Grafo:
     TAM_MAX_DEFAULT = 100
@@ -108,3 +109,8 @@ class Grafo:
     def createGraphFromFile(self, filename):
         atvCreateGraphFromFile(self, filename)
         self.showMin()
+
+    def isComplete(self) -> bool:
+        is_complete = atvIsComplete(self)
+        print(f"Grafo == completo: {is_complete}")
+        return is_complete
