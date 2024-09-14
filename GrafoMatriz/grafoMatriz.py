@@ -17,6 +17,7 @@ from Atividades.atv1 import sorvedouro as atvSorvedouro
 from Atividades.atv1 import isSymmetric as atvIsSymmetric
 from Atividades.atv1 import createGraphFromFile as atvCreateGraphFromFile
 from Atividades.atv1 import D_isComplete as atvIsComplete
+from Atividades.atv1 import complemento as atvComplemento
 
 class Grafo:
     TAM_MAX_DEFAULT = 100
@@ -114,3 +115,8 @@ class Grafo:
         is_complete = atvIsComplete(self)
         print(f"Grafo == completo: {is_complete}")
         return is_complete
+
+    def complemento(self) -> g:
+        return atvComplemento(self)
+    
+    

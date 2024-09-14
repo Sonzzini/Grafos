@@ -6,6 +6,8 @@ import os
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from Atividades.atv1 import ND_isComplete as atvIsComplete
+from Atividades.atv1 import complemento as atvComplemento
+
 class GrafoND:
     TAM_MAX_DEFAULT = 100
 
@@ -80,3 +82,8 @@ class GrafoND:
         is_complete = atvIsComplete(self)
         print(f"Grafo == complete: {is_complete}")
         return is_complete
+    
+    def complemento(self):
+        return atvComplemento(self)
+
+    

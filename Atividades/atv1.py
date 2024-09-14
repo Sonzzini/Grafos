@@ -59,3 +59,11 @@ def D_isComplete(g) -> bool:
         if 0 in g.adj[i][:i] + g.adj[i][i+1:]:
             return False
     return True
+
+def complemento(g) -> g:
+    d = g.adj
+    for i in range(g.n):
+        for j in range(g.n):
+            if d.adj[i][j] == 0:
+                d.adj[i][j] = 1
+    return d
