@@ -29,3 +29,6 @@ g.showMin()
 
 # g.createGraphFromFile('instructions.txt')
 g.isComplete()
+
+ctg = g.categoriaConexidade()
+print(f"G é C{ctg}")
