@@ -14,3 +14,6 @@ grafo.removeV(5)
 
 grafo.showMin()
 
+conexidade = grafo.isConexo()
+print(f"Conexidade: {conexidade}")
+

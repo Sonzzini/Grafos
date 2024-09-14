@@ -18,6 +18,7 @@ from Atividades.atv1 import isSymmetric as atvIsSymmetric
 from Atividades.atv1 import createGraphFromFile as atvCreateGraphFromFile
 from Atividades.atv1 import D_isComplete as atvIsComplete
 from Atividades.atv1 import complemento as atvComplemento
+# from Atividades.atv1 import D_isConexo as atvIsConexo
 
 class Grafo:
     TAM_MAX_DEFAULT = 100
@@ -116,7 +117,8 @@ class Grafo:
         print(f"Grafo == completo: {is_complete}")
         return is_complete
 
-    def complemento(self) -> g:
+    def complemento(self):
         return atvComplemento(self)
     
-    
+    # def isConexo(self) -> bool:
+    #     return atvIsConexo(self)
