@@ -6,6 +6,7 @@ Created on Mon Feb 13 13:59:10 2023
 """
 import sys
 import os
+import numpy as np
 
 # Adiciona o diretório pai ao sys.path
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -124,61 +125,74 @@ class Grafo:
     #     return atvIsConexo(self)
 
     # Método principal para verificar a categoria de conexidade
-    def categoriaConexidade(self):
-        # Verificar se o grafo é fortemente conexo (C3)
-        if self.isConexoForte() == 0:
+    def conexidade_categoria(self):
+        # Verificar se o grafo é fortemente conexo (C3) primeiro
+        if self.is_strongly_connected() == 0:
             return 3  # C3: Fortemente conexo
 
-        # Verificar se o grafo é unilateralmente conexo (C2)
-        if self.isConexoUnilateral() == 0:
+        # Se não for fortemente conexo, verificar se é unilateralmente conexo (C2)
+        if self.is_unilaterally_connected() == 0:
             return 2  # C2: Unilateralmente conexo
 
-        # Verificar se o grafo é fracamente conexo (C1)
-        if self.isConexoFraco() == 0:
+        # Se não for C2, verificar se é fracamente conexo (C1)
+        if self.is_weakly_connected() == 0:
             return 1  # C1: Fracamente conexo
 
-        # Se não atender a nenhuma dessas condições, é desconexo (C0)
+        # Se nenhuma das condições acima for satisfeita, é desconexo (C0)
         return 0  # C0: Desconexo
 
+
     # Método auxiliar para verificar a conexidade forte (C3)
-    def isConexoForte(self):
-        visitados = [False] * self.n
+    def is_strongly_connected(self):
+        n = len(self.adj)
 
-        # Realiza a DFS a partir de um vértice
-        self._dfs(0, visitados)
+        visited = [False] * n
 
-        # Se algum vértice não foi visitado, o grafo não é fortemente conexo
-        if not all(visitados):
-            return 1
+        self.dfs(0, visited)
 
-        # Transpor o grafo e realizar DFS no grafo transposto
-        grafo_transposto = self._transpor()
-        visitados_transposto = [False] * self.n
-        grafo_transposto._dfs(0, visitados_transposto)
+        if not all(visited):
+            return False
+        
+        transposed_graph = np.transpose(self.adj)
 
-        # Se todos os vértices foram visitados no grafo transposto, é fortemente conexo
-        if all(visitados_transposto):
-            return 0
-        else:
-            return 1
+        visited = [False] * n
+
+        self.dfs(transposed_graph, 0, visited)
+
+        return all(visited)
 
     # Método auxiliar para verificar a conexidade unilateral (C2)
-    def isConexoUnilateral(self):
-        for v in range(self.n):
-            for w in range(v + 1, self.n):
-                # Verifica se existe um caminho de v para w ou de w para v
-                if not (self._existeCaminho(v, w) or self._existeCaminho(w, v)):
-                    return 1  # Não é unilateralmente conexo
-        return 0  # É unilateralmente conexo
+    def is_unilaterally_connected(self):
+        n = len(self.adj)
+
+        for i in range(n):
+            reachable_from_v = [False] * n
+            self.dfs(self.adj, i, reachable_from_v)
+
+            reachable_to_v = [False] * n
+            self.dfs(np.transpose(self.adj), i, reachable_to_v)
+
+            for j in range(n):
+                if not (reachable_from_v[j] or reachable_to_v[j]):
+                    return False
+        return True
+
 
     # Método auxiliar para verificar a conexidade fraca (C1)
-    def isConexoFraco(self):
-        visitados = [False] * self.n
-        self._dfs_fraco(0, visitados)
-        if all(visitados):
-            return 0  # Fracamente conexo
-        else:
-            return 1  # Desconexo
+    def is_weakly_connected(self):
+        n = len(self.adj)
+
+        undirected_graph = np.copy(self.adj)
+
+        for i in range(n):
+            for j in range(n):
+                if self.adj[i][j] == 1 or self.adj[j][i] == 1:
+                    undirected_graph[i][j] = undirected_graph[j][i] = 1
+
+        visited = [False] * n
+        self.dfs(undirected_graph, 0, visited)
+
+        return all(visited)
 
     # DFS que ignora a direção das arestas (para conexidade fraca)
     def _dfs_fraco(self, v, visitados):
@@ -188,11 +202,11 @@ class Grafo:
                 self._dfs_fraco(w, visitados)
 
     # DFS simples (para conexidade forte e unilateral)
-    def _dfs(self, v, visitados):
+    def dfs(self, v, visitados):
         visitados[v] = True
-        for w in range(self.n):
-            if self.adj[v][w] == 1 and not visitados[w]:
-                self._dfs(w, visitados)
+        for i in range(self.n):
+            if self.adj[v][i] == 1 and not visitados[i]:
+                self.dfs(i, visitados)
 
     # Método auxiliar para transpor o grafo (inverter as arestas)
     def _transpor(self):
@@ -209,4 +223,77 @@ class Grafo:
         self._dfs(v, visitados)
         return visitados[w]
 
-    
+    # Método que retorna o grafo reduzido no formato de uma matriz de adjacência
+    def grafoReduzido(self):
+        # Passo 1: Encontrar as componentes fortemente conexas usando Kosaraju
+        componentes_fortemente_conexas = self._kosaraju()
+
+        # Número de componentes fortemente conexas
+        num_componentes = len(componentes_fortemente_conexas)
+
+        # Passo 2: Criar a matriz de adjacência do grafo reduzido
+        grafo_reduzido_adj = [[0 for _ in range(num_componentes)] for _ in range(num_componentes)]
+
+        # Mapear cada vértice original para a sua componente fortemente conexa
+        componente_de_vertice = [-1] * self.n
+        for i, componente in enumerate(componentes_fortemente_conexas):
+            for v in componente:
+                componente_de_vertice[v] = i
+
+        # Passo 3: Criar as arestas entre as componentes no grafo reduzido
+        for v in range(self.n):
+            for w in range(self.n):
+                if self.adj[v][w] == 1:
+                    componente_v = componente_de_vertice[v]
+                    componente_w = componente_de_vertice[w]
+                    if componente_v != componente_w:
+                        grafo_reduzido_adj[componente_v][componente_w] = 1
+
+        return grafo_reduzido_adj
+
+
+    # Implementação do algoritmo de Kosaraju para encontrar as componentes fortemente conexas
+    def _kosaraju(self):
+        # Passo 1: Fazer a DFS normal e empilhar os vértices na ordem de finalização
+        visitados = [False] * self.n
+        ordem_finalizacao = []
+
+        for v in range(self.n):
+            if not visitados[v]:
+                self._dfs_kosaraju(v, visitados, ordem_finalizacao)
+
+        # Passo 2: Transpor o grafo
+        grafo_transposto = self._transpor()
+
+        # Passo 3: Fazer a DFS no grafo transposto na ordem inversa de finalização
+        visitados_transposto = [False] * self.n
+        componentes_fortemente_conexas = []
+
+        while ordem_finalizacao:
+            v = ordem_finalizacao.pop()
+            if not visitados_transposto[v]:
+                componente_atual = []
+                grafo_transposto._dfs_componente(v, visitados_transposto, componente_atual)
+                componentes_fortemente_conexas.append(componente_atual)
+
+        # Depuração: Exibir as componentes fortemente conexas
+        print("Componentes Fortemente Conexas:", componentes_fortemente_conexas)
+        
+        return componentes_fortemente_conexas
+
+
+    # DFS para Kosaraju - Primeiro passo, empilhar na ordem de finalização
+    def _dfs_kosaraju(self, v, visitados, ordem_finalizacao):
+        visitados[v] = True
+        for w in range(self.n):
+            if self.adj[v][w] == 1 and not visitados[w]:
+                self._dfs_kosaraju(w, visitados, ordem_finalizacao)
+        ordem_finalizacao.append(v)
+
+    # DFS para encontrar componentes fortemente conexas no grafo transposto
+    def _dfs_componente(self, v, visitados_transposto, componente_atual):
+        visitados_transposto[v] = True
+        componente_atual.append(v)
+        for w in range(self.n):
+            if self.adj[w][v] == 1 and not visitados_transposto[w]:
+                self._dfs_componente(w, visitados_transposto, componente_atual)
