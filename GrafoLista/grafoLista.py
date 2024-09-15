@@ -4,6 +4,9 @@ Created on Tue Feb 14 16:01:03 2023
 
 @author: icalc
 """
+
+from Atividades.atv1_lista import isEqual as atvIsEqual
+
 # Grafo como uma lista de adjacência
 class Grafo:
     TAM_MAX_DEFAULT = 100 # qtde de vértices máxima default
@@ -38,5 +41,8 @@ class Grafo:
                 print(f"{val:2d}", end="") 
 
         print("\n\nfim da impressao do grafo." )
+
+    def isEqual(grafo2):
+      return atvIsEqual(grafo2)
         
         
