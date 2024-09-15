@@ -7,6 +7,8 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from Atividades.atv1 import ND_isComplete as atvIsComplete
 from Atividades.atv1 import complemento as atvComplemento
+from Atividades.atv1 import ND_isConexo as atvIsConexo
+from Atividades.atv1 import ND_dfs as atvDFS
 
 class GrafoND:
     TAM_MAX_DEFAULT = 100
@@ -86,4 +88,6 @@ class GrafoND:
     def complemento(self):
         return atvComplemento(self)
 
-    
+    def isConexo(self) -> bool:
+        return atvIsConexo(self)
+
