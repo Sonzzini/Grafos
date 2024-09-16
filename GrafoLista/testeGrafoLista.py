@@ -112,7 +112,7 @@ print("Grafo original:")
 grafo.show()
 
 # Remover o vértice 3
-grafo.removeV(3)
+grafo.removeVD(3)
 
 print("Grafo após remover o vértice 3:")
 grafo.show()
@@ -131,7 +131,7 @@ print("Grafo original:")
 grafo.show()
 
 # Remover o vértice 3
-grafo.remove_vertice(3)
+grafo.removeVD(3)
 
 print("Grafo após remover o vértice 3:")
 grafo.show()
@@ -151,7 +151,7 @@ grafo1.insereA(3, 0)
 grafo1.insereA(3, 1)
 grafo1.insereA(3, 2)
 
-print("Grafo 1 é completo?", grafo1.eh_completo())  # Deve retornar True
+print("Grafo 1 é completo?", grafo1.isComplete())  # Deve retornar True
 
 grafo2 = Grafo(4)
 grafo2.insereA(0, 1)
@@ -159,4 +159,4 @@ grafo2.insereA(0, 2)
 grafo2.insereA(1, 2)
 grafo2.insereA(2, 3)
 
-print("Grafo 2 é completo?", grafo2.eh_completo())  # Deve retornar False
+print("Grafo 2 é completo?", grafo2.isComplete())  # Deve retornar False
