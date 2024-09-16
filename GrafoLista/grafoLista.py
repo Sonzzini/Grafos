@@ -1,11 +1,25 @@
-# -*- coding: utf-8 -*-
+# -- coding: utf-8 --
 """
 Created on Tue Feb 14 16:01:03 2023
 
 @author: icalc
 """
 
+import sys
+import os
+
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 from Atividades.atv1_lista import isEqual as atvIsEqual
+from Atividades.atv1_lista import fromMatrizToList as atvFromMatrizToList
+from Atividades.atv1_lista import invertAdjList as atvInvertAdjList
+from Atividades.atv1_lista import isSource as atvIsSource
+from Atividades.atv1_lista import isSorvedouro as atvIsSorvedouro
+from Atividades.atv1_lista import isSymetric as atvIsSymetric
+from Atividades.atv1_lista import adjListBuilder as atvAdjListBuilder
+from Atividades.atv1_lista import removeV as atvRemoveV
+from Atividades.atv1_lista import removeVD as atvRemoveVD
+from Atividades.atv1_lista import isComplete as atvIsComplete
 
 # Grafo como uma lista de adjacência
 class Grafo:
@@ -42,7 +56,32 @@ class Grafo:
 
         print("\n\nfim da impressao do grafo." )
 
-    def isEqual(grafo2):
-      return atvIsEqual(grafo2)
+    def isEqual(self, grafo2):
+      return atvIsEqual(self, grafo2)
+    
+    def fromMatrizToList(self, matriz):
+      return atvFromMatrizToList(self, matriz)
+    
+    def invertAdjList(self):
+        return atvInvertAdjList(self)
+    
+    def isSource(self,v):
+        return atvIsSource(self,v)
+    
+    def isSorvedouro(self, v):
+        return atvIsSorvedouro(self, v)
+    
+    def isSymetric(self):
+        return atvIsSymetric(self)
+    
+    def adjListBuilder(self, nome_arquivo):
+        return atvAdjListBuilder(self, nome_arquivo)
         
-        
+    def removeV(self, v):
+        return atvRemoveV(self, v)
+    
+    def removeVD(self, v):
+        return atvRemoveVD(self, v)
+    
+    def isComplete(self):
+        return atvIsComplete(self)

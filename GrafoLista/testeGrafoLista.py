@@ -1,5 +1,6 @@
 import sys
 import os
+import numpy as np
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
@@ -28,7 +29,7 @@ matriz_adjacencia = np.array([
     [1, 0, 0]
 ])
 
-grafo = Grafo.fromMatrizToList(matriz_adjacencia)
+grafo = Grafo.fromMatrizToList(Grafo, matriz_adjacencia)
 grafo.show()
 
 # Ex 19
@@ -92,7 +93,7 @@ print(f"O grafo 2 é simétrico? {grafo2.isSymetric()}")  # Deve retornar 0
 
 # Ex 23
 nome_arquivo = 'grafo.txt'
-grafo = Grafo.adjListBuilder(nome_arquivo)
+grafo = Grafo.adjListBuilder(Grafo, nome_arquivo)
 
 print("Grafo carregado do arquivo:")
 grafo.show()
