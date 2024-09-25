@@ -30,11 +30,20 @@ class Grafo:
         self.m = 0 # número de arestas
         # lista de adjacência
         self.listaAdj = [[] for i in range(self.n)]
-        
+    
+    
+    def insereV(self):
+        self.listaAdj.append([])
+        self.n += 1
+
 	# Insere uma aresta no Grafo tal que
 	# v é adjacente a w
     def insereA(self, v, w):
         self.listaAdj[v].append(w)
+        self.m+=1
+
+    def insereA_com_peso(self, v, w, value):
+        self.listaAdj[v].append((w, value))
         self.m+=1
      
     # remove uma aresta v->w do Grafo	
@@ -52,9 +61,18 @@ class Grafo:
             print(f"\n{i:2d}: ", end="")
             for w in range(len(self.listaAdj[i])):
                 val = self.listaAdj[i][w]
-                print(f"{val:2d}", end="") 
+                print(f"{val}", end="")
 
         print("\n\nfim da impressao do grafo." )
+
+    def show_as_matrix(self):
+        print(f"\nn: {self.n:2d} ", end="")
+        print(f"m: {self.m:2d}\n")
+        for i in range(self.n):
+            print(i, end=": ")
+            for j in range(len(self.listaAdj[i])):
+                print(f"{self.listaAdj[i][j]} ", end = "")
+            print()
 
     def isEqual(self, grafo2):
       return atvIsEqual(self, grafo2)
