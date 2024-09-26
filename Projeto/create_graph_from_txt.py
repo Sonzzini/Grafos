@@ -1,5 +1,6 @@
 import sys
 import os
+from typing import List
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
@@ -33,3 +34,22 @@ def make_graph_from_txt(nome_arquivo: str) -> Grafo:
             grafo.insereA_com_peso(w, v, value)
         
         return grafo
+
+
+def make_txt_from_graph(nome_arquivo: str, grafo_f: List[Grafo]):
+    grafo = grafo_f[0]
+
+    with open(nome_arquivo, 'w') as arquivo:
+        arquivo.write("2\n")
+        arquivo.write(str(grafo.n)+"\n")
+        
+        for i in range(grafo.n):
+            arquivo.write(str(i)+"\n")
+        
+        arquivo.write(str(grafo.m)+"\n")
+
+        for j in range(grafo.n):
+            for k in range(len(grafo.listaAdj[j])):
+                if k > j:
+                    aresta = grafo.listaAdj[j][k]
+                    arquivo.write(f"{j} {aresta[0]} {aresta[1]}\n")

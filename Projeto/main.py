@@ -3,7 +3,8 @@ import os
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from create_graph_from_txt import make_graph_from_txt as create_txt
+from create_graph_from_txt import make_graph_from_txt as create_from_txt
+from create_graph_from_txt import make_txt_from_graph as create_txt_from
 from GrafoLista.grafoLista import Grafo
 
 from typing import List
@@ -25,14 +26,14 @@ def presentMenu():
 
 def handle_selection(selection: int, grafo_f: List[Grafo]):
     if selection == 0:
-        grafo = create_txt('Projeto/grafo.txt')
+        grafo = create_from_txt('Projeto/grafo.txt')
         print("Arquivo 'grafo.txt' lido com sucesso")
         grafo_f[0] = grafo
     
 
     elif selection == 1:
-        # Gravar dados no arquivo
-        ...
+        nome_arquivo = str(input("Digite o nome do arquivo para ser escrito: "))
+        create_txt_from(nome_arquivo, grafo_f)
     
 
     elif selection == 2:  # Inserir vértice
