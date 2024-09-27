@@ -161,34 +161,34 @@ from grafoLista import Grafo
 
 # print("Grafo 2 é completo?", grafo2.eh_completo())  # Deve retornar False
 
-def arquivo_para_grafo(nome_arquivo):
-    with open(nome_arquivo, 'r') as file:
-        linhas = file.readlines()
+# def arquivo_para_grafo(nome_arquivo):
+#     with open(nome_arquivo, 'r') as file:
+#         linhas = file.readlines()
     
-    tipo_grafo = int(linhas[0].strip())
-    print(tipo_grafo)
-    if tipo_grafo != 2:
-        raise ValueError("Tipo de grafo não suportado. Apenas grafos do tipo 2 são suportados.")
+#     tipo_grafo = int(linhas[0].strip())
+#     print(tipo_grafo)
+#     if tipo_grafo != 2:
+#         raise ValueError("Tipo de grafo não suportado. Apenas grafos do tipo 2 são suportados.")
     
-    n = int(linhas[1].strip())
-    grafo = Grafo(n)
+#     n = int(linhas[1].strip())
+#     grafo = Grafo(n)
     
-    # Ignorar as linhas dos vértices, pois não estamos usando apelidos ou pesos dos vértices
-    indice_atual = 2 + n
+#     # Ignorar as linhas dos vértices, pois não estamos usando apelidos ou pesos dos vértices
+#     indice_atual = 2 + n
     
-    m = int(linhas[indice_atual].strip())
-    indice_atual += 1
+#     m = int(linhas[indice_atual].strip())
+#     indice_atual += 1
     
-    for i in range(m):
-        aresta_info = linhas[indice_atual + i].strip().split()
-        v = int(aresta_info[0]) - 1  # Ajustar para índice baseado em 0
-        w = int(aresta_info[1]) - 1  # Ajustar para índice baseado em 0
-        # O peso da aresta é ignorado, pois a classe Grafo não o utiliza
-        grafo.insereA(v, w)
+#     for i in range(m):
+#         aresta_info = linhas[indice_atual + i].strip().split()
+#         v = int(aresta_info[0]) - 1  # Ajustar para índice baseado em 0
+#         w = int(aresta_info[1]) - 1  # Ajustar para índice baseado em 0
+#         # O peso da aresta é ignorado, pois a classe Grafo não o utiliza
+#         grafo.insereA(v, w)
     
-    return grafo
+#     return grafo
 
-# Exemplo de uso:
-nome_arquivo = 'grafo.txt'  # Substitua pelo caminho do seu arquivo
-grafo = arquivo_para_grafo(nome_arquivo)
-grafo.show()
+# # Exemplo de uso:
+# nome_arquivo = 'grafo.txt'  # Substitua pelo caminho do seu arquivo
+# grafo = arquivo_para_grafo(nome_arquivo)
+# grafo.show()

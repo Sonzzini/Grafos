@@ -17,7 +17,7 @@ from Atividades.atv1_lista import isSource as atvIsSource
 from Atividades.atv1_lista import isSorvedouro as atvIsSorvedouro
 from Atividades.atv1_lista import isSymetric as atvIsSymetric
 from Atividades.atv1_lista import adjListBuilder as atvAdjListBuilder
-from Atividades.atv1_lista import removeV as atvRemoveV
+from Atividades.atv1_lista import removeVertice as atvRemoveVertice
 from Atividades.atv1_lista import removeVD as atvRemoveVD
 from Atividades.atv1_lista import isComplete as atvIsComplete
 
@@ -46,10 +46,40 @@ class Grafo:
         self.listaAdj[v].append((w, value))
         self.m+=1
      
-    # remove uma aresta v->w do Grafo	
+    # Remove uma aresta v->w do Grafo
     def removeA(self, v, w):
-        self.listaAdj[v].remove(w)
-        self.m-=1
+        for edge in self.listaAdj[v]:
+            if edge[0] == w:
+                self.listaAdj[v].remove(edge)
+                self.m -= 1
+                break
+        for edge in self.listaAdj[w]:
+            if edge[0] == v:
+                self.listaAdj[w].remove(edge)
+                self.m -= 1
+                break
+
+    # Remove um vértice do Grafo
+    def removeV(self, v):
+        if v >= self.n:
+            print("Vértice não existe no grafo.")
+            return
+
+        # Remover todas as arestas que partem do vértice v
+        self.m -= len(self.listaAdj[v])
+        self.listaAdj[v] = []
+
+        # Remover todas as arestas que chegam ao vértice v
+        for i in range(self.n):
+            self.listaAdj[i] = [edge for edge in self.listaAdj[i] if edge[0] != v]
+
+        # Ajustar a lista de adjacência
+        self.listaAdj.pop(v)
+        self.n -= 1
+
+        # Ajustar as arestas restantes
+        for i in range(self.n):
+            self.listaAdj[i] = [(x - 1 if x > v else x, p) for x, p in self.listaAdj[i]]
         
 	# Apresenta o Grafo contendo
 	# número de vértices, arestas
@@ -95,8 +125,8 @@ class Grafo:
     def adjListBuilder(self, nome_arquivo):
         return atvAdjListBuilder(self, nome_arquivo)
         
-    def removeV(self, v):
-        return atvRemoveV(self, v)
+    def removeVertice(self, v):
+        return atvRemoveVertice(self, v)
     
     def removeVD(self, v):
         return atvRemoveVD(self, v)
