@@ -68,8 +68,8 @@ def handle_selection(selection: int, grafo_f: List[Grafo]):
         grafo_f[0].removeV(vertice)
 
     elif selection == 5: # Remover aresta
-        vertice1 = int(input("Digite o primeiro elemento da aresta a ser removida:"))
-        vertice2 = int(input("Digite o segundo elemento da aresta a ser removida:"))
+        vertice1 = int(input("Digite o número do vértice de origem da aresta a ser removida: "))
+        vertice2 = int(input("Digite o número do vértice de destino da aresta a ser removida: "))
         grafo_f[0].removeA(vertice1, vertice2)
 
     elif selection == 6:  # Mostrar conteúdo do arquivo
@@ -84,10 +84,8 @@ def handle_selection(selection: int, grafo_f: List[Grafo]):
         grafo_f[0].show_as_matrix()
 
     
-    elif selection == 8:
-        # Mostrar conexão do grafo
-        # Grafo reduzido
-        grafo_f[0].determinar_conexidade()
+    elif selection == 8:  # Mostrar conexão do grafo | Grafo reduzido
+        print(grafo_f[0].determinar_conexidade())
         grafo_f[0].grafo_reduzido()
 
 
