@@ -62,16 +62,15 @@ def handle_selection(selection: int, grafo_f: List[Grafo]):
             else:
                 print("Erro.\nPor favor escolha:\n1 - Inserir aresta com peso\n2 - Inserir aresta sem peso\n")
 
+    elif selection == 4: # Remover vértice
+        vertice = int(input("Digite o vértice a ser removido:"))
+        print(vertice)
+        grafo_f[0].removeV(vertice)
 
-    elif selection == 4:
-        # Remover vértice
-        ...
-
-
-    elif selection == 5:
-        # Remover aresta
-        ...
-    
+    elif selection == 5: # Remover aresta
+        vertice1 = int(input("Digite o primeiro elemento da aresta a ser removida:"))
+        vertice2 = int(input("Digite o segundo elemento da aresta a ser removida:"))
+        grafo_f[0].removeA(vertice1, vertice2)
 
     elif selection == 6:  # Mostrar conteúdo do arquivo
         print("Mostrando conteúdo do arquivo 'Projeto/grafo.txt':", end="\n\n")

@@ -86,7 +86,7 @@ def adjListBuilder(cls, nome_arquivo):
         
     return grafo
 
-def removeV(self, vertice):
+def removeVertice(self, vertice):
     # Remover todas as arestas associadas ao vértice
     while self.listaAdj[vertice]:
         adjacente = self.listaAdj[vertice].pop()
