@@ -77,7 +77,8 @@ def handle_selection(selection: int, grafo_f: List[Grafo]):
         arquivo = 'Projeto/grafo.txt'
         with open(arquivo, 'r') as arquivo:
             linhas = arquivo.readlines()
-            print(linhas)
+            for linha in linhas:
+                print(linha)
 
     
     elif selection == 7:  # Mostrar grafo
@@ -85,7 +86,7 @@ def handle_selection(selection: int, grafo_f: List[Grafo]):
 
     
     elif selection == 8:  # Mostrar conexão do grafo | Grafo reduzido
-        print(grafo_f[0].determinar_conexidade())
+        grafo_f[0].determinar_conexidade()
         grafo_f[0].grafo_reduzido()
 
 
