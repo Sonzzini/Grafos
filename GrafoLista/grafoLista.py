@@ -133,3 +133,38 @@ class Grafo:
     
     def isComplete(self):
         return atvIsComplete(self)
+    
+    # Função auxiliar para realizar uma busca em profundidade (DFS)
+    def dfs(self, v, visitados):
+        visitados[v] = True
+        for vizinho, _ in self.listaAdj[v]:
+            if not visitados[vizinho]:
+                self.dfs(vizinho, visitados)
+
+    # Função para verificar quantos componentes conexos existem no grafo
+    def contar_componentes_conexos(self):
+        visitados = [False] * self.n
+        componentes = 0
+        for v in range(self.n):
+            if not visitados[v]:
+                self.dfs(v, visitados)
+                componentes += 1
+        return componentes
+
+    # Função para determinar a conexidade C0, C1, C2 e C3
+    def determinar_conexidade(self):
+        componentes = self.contar_componentes_conexos()
+        if componentes > 1:
+            print("C0: Grafo Desconexo")
+        elif componentes == 1 and self.m > 0:
+            print("C3: Grafo Fortemente Conexo")
+        else:
+            print("C2: Grafo Medianamente Conexo")
+
+    # Função para imprimir o grafo reduzido
+    def grafo_reduzido(self):
+        componentes = self.contar_componentes_conexos()
+        if componentes == 1:
+            print("Grafo reduzido é um único vértice, pois o grafo é fortemente conexo.")
+        else:
+            print(f"O grafo possui {componentes} componentes. Não pode ser reduzido a um único vértice.")

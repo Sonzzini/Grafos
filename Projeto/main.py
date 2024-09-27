@@ -87,7 +87,8 @@ def handle_selection(selection: int, grafo_f: List[Grafo]):
     elif selection == 8:
         # Mostrar conexão do grafo
         # Grafo reduzido
-        ...
+        grafo_f[0].determinar_conexidade()
+        grafo_f[0].grafo_reduzido()
 
 
     elif selection == 9:
