@@ -43,24 +43,25 @@ def handle_selection(selection: int, grafo_f: List[Grafo]):
 
     elif selection == 3:  # Inserir aresta
         while True:
-            option = int(input("Gostaria de inserir uma aresta com peso ou sem peso?\n1 - Com peso\n2 - Sem peso\n"))
+            option = int(input("Gostaria de inserir uma aresta com peso personalizado ou com peso 1?\n1 - Com peso personalizado\n2 - Com peso 1\n"))
 
             if option == 1:
-                print("-- Inserindo aresta com peso --")
-                v1, v2, peso = int(input("Formato [v1] [v2] [peso]").split())
+                print("-- Inserindo aresta com peso personalizado --")
+                v1, v2, peso = map(int, input("Formato [v1] [v2] [peso]: ").split())
                 grafo_f[0].insereA_com_peso(v1, v2, peso)
                 print(f"Aresta de valor {peso} entre {v1} e {v2} adicionada com sucesso.")
                 break
 
             elif option == 2:
-                print("-- Inserindo aresta sem peso (peso - 1) --")
-                v1, v2 = int(input("Formato [v1] [v2]").split())
+                print("-- Inserindo aresta com peso 1 --")
+                v1, v2 = map(int, input("Formato [v1] [v2]: ").split())
                 grafo_f[0].insereA_com_peso(v1, v2, 1)
                 print(f"Aresta entre {v1} e {v2} adicionada com sucesso.")
                 break
 
             else:
-                print("Erro.\nPor favor escolha:\n1 - Inserir aresta com peso\n2 - Inserir aresta sem peso\n")
+                print("Erro.\nPor favor escolha:\n1 - Inserir aresta com peso personalizado\n2 - Inserir aresta com peso 1\n")
+
 
     elif selection == 4: # Remover vértice
         vertice = int(input("Digite o vértice a ser removido:"))
@@ -107,6 +108,5 @@ def main():
         if selection == 9:
             break
     
-
 
 main()

@@ -50,6 +50,5 @@ def make_txt_from_graph(nome_arquivo: str, grafo_f: List[Grafo]):
 
         for j in range(grafo.n):
             for k in range(len(grafo.listaAdj[j])):
-                if k > j:
-                    aresta = grafo.listaAdj[j][k]
-                    arquivo.write(f"{j} {aresta[0]} {aresta[1]}\n")
+                aresta = grafo.listaAdj[j][k]
+                arquivo.write(f"{j} {aresta[0]} {aresta[1]}\n")
