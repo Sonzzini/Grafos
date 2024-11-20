@@ -168,3 +168,41 @@ class Grafo:
             print("Grafo reduzido é um único vértice, pois o grafo é fortemente conexo.")
         else:
             print(f"O grafo possui {componentes} componentes. Não pode ser reduzido a um único vértice.")
+
+    def findSmallestRoute(self, inicio, fim):
+        # Inicializa as distâncias e o caminho
+        num_vertices = len(grafo)
+        distancias = [float('infinity')] * num_vertices
+        distancias[inicio] = 0
+        fila_prioridade = [(0, inicio)]
+        vertices_anteriores = [None] * num_vertices
+    
+        while fila_prioridade:
+            distancia_atual, vertice_atual = heapq.heappop(fila_prioridade)
+        
+            # Se chegamos ao destino, podemos reconstruir o caminho
+            if vertice_atual == fim:
+                caminho = []
+                while vertices_anteriores[vertice_atual] is not None:
+                    caminho.append(vertice_atual)
+                    vertice_atual = vertices_anteriores[vertice_atual]
+                caminho.append(inicio)
+                print("Menor rota:", " -> ".join(map(str, reversed(caminho))))
+                return
+        
+            # Se a distância atual é maior do que a registrada, continue
+            if distancia_atual > distancias[vertice_atual]:
+                continue
+        
+            # Verifica os vizinhos e atualiza as distâncias
+            for vizinho, peso in grafo[vertice_atual]:
+                distancia = distancia_atual + peso
+            
+                if distancia < distancias[vizinho]:
+                    distancias[vizinho] = distancia
+                    vertices_anteriores[vizinho] = vertice_atual
+                    heapq.heappush(fila_prioridade, (distancia, vizinho))
+    
+        print("Não há caminho entre os dois vértices.")
+
+    
