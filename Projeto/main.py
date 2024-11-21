@@ -27,7 +27,7 @@ def presentMenu():
 
 def handle_selection(selection: int, grafo_f: List[Grafo]):
     if selection == 0:
-        grafo = create_from_txt('Projeto/grafo.txt')
+        grafo = create_from_txt('grafo.txt')
         print("Arquivo 'grafo.txt' lido com sucesso")
         grafo_f[0] = grafo
     
@@ -96,10 +96,20 @@ def handle_selection(selection: int, grafo_f: List[Grafo]):
         print("Encerrando o programa...")
 
     elif selection == 10:
-        origem = str(input("Estação de partida: "))
-        destino = str(input("Estação de destino: "))
+        # TODO: Mudar para string depois rs
+        origem = int(input("Estação de partida: "))
+        destino = int(input("Estação de destino: "))
+
+        rota = grafo_f[0].calcular_rota(origem-1, destino-1)
         
-        
+        if rota:
+            print("Rota: ", end="")
+            for path in rota:
+                print(f"{path+1}", end="")
+                if path == rota[len(rota)-1]:
+                    break
+                print(" -> ", end="")
+            print()
 
 
 def main():

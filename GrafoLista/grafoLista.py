@@ -7,6 +7,7 @@ Created on Tue Feb 14 16:01:03 2023
 
 import sys
 import os
+from collections import deque
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
@@ -168,3 +169,46 @@ class Grafo:
             print("Grafo reduzido é um único vértice, pois o grafo é fortemente conexo.")
         else:
             print(f"O grafo possui {componentes} componentes. Não pode ser reduzido a um único vértice.")
+
+    def calcular_rota(self, origem, destino):
+        # Verifica se os vértices são válidos
+        if origem >= self.n or destino >= self.n:
+            print("Erro: vértices inválidos.")
+            return None
+
+        # Inicializa a fila para a BFS e o dicionário de predecessores
+        fila = deque([origem])
+        visitados = [False] * self.n
+        predecessores = [-1] * self.n
+
+        # Marca o vértice de origem como visitado
+        visitados[origem] = True
+
+        # Realiza a BFS
+        while fila:
+            atual = fila.popleft()
+            for vizinho, _ in self.listaAdj[atual]:  # Ignora o peso e só usa o vizinho
+                if not visitados[vizinho]:
+                    visitados[vizinho] = True
+                    predecessores[vizinho] = atual
+                    fila.append(vizinho)
+                    if vizinho == destino:
+                        break
+
+        # Reconstrói o caminho se o destino foi alcançado
+        if not visitados[destino]:
+            print(f"Não existe rota entre os vértices {origem} e {destino}.")
+            return None
+
+        caminho = []
+        atual = destino
+        while atual != -1:
+            caminho.append(atual)
+            atual = predecessores[atual]
+        caminho.reverse()
+
+        return caminho
+
+
+# # Adiciona a função à classe Grafo
+# setattr(Grafo, "calcular_rota", calcular_rota)
