@@ -21,6 +21,7 @@ from Atividades.atv1_lista import adjListBuilder as atvAdjListBuilder
 from Atividades.atv1_lista import removeVertice as atvRemoveVertice
 from Atividades.atv1_lista import removeVD as atvRemoveVD
 from Atividades.atv1_lista import isComplete as atvIsComplete
+from Projeto.num_to_station import num_to_station
 
 # Grafo como uma lista de adjacência
 class Grafo:
@@ -197,7 +198,7 @@ class Grafo:
 
         # Reconstrói o caminho se o destino foi alcançado
         if not visitados[destino]:
-            print(f"Não existe rota entre os vértices {origem} e {destino}.")
+            print(f"Não existe rota entre os vértices {num_to_station[origem+1]} e {num_to_station[destino+1]}.")
             return None
 
         caminho = []

@@ -10,9 +10,11 @@ importantes linha amarela
 33 - república
 
 
-93 - 114  [1-23] linha azul :check:
-115 - 126 [24-29:15,16:30-32,45,44,46] linha verde :check:
-155 - 172 [47, 48, 49, 33, 50, 11, 51-63] linha vermelha :check:
-173 - 185 [9, 52, 79, 80, 44, 81-89] linha turquesa :check:
-127 - 138 [9, 33, 34, 27, 35-43] linha amarela :check:
-139 - 154 [30, 18, 64-78] linha lilás :check:
+[1-23] linha azul :check:
+[24-29:15,16:30-32,45,44,46] linha verde :check:
+[47, 48, 49, 33, 50, 11, 51-63] linha vermelha :check:
+[9, 52, 79, 80, 44, 81-89] linha turquesa :check:
+[9, 33, 34, 27, 35-43] linha amarela :check:
+[30, 18, 64-78] linha lilás :check:
+[90-107] linha esmeralda :check:
+[108-126] linha diamante :check:

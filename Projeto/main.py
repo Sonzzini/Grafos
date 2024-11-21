@@ -6,6 +6,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from create_graph_from_txt import make_graph_from_txt as create_from_txt
 from create_graph_from_txt import make_txt_from_graph as create_txt_from
 from GrafoLista.grafoLista import Grafo
+from num_to_station import num_to_station
 
 from typing import List
 
@@ -97,15 +98,19 @@ def handle_selection(selection: int, grafo_f: List[Grafo]):
 
     elif selection == 10:
         # TODO: Mudar para string depois rs
-        origem = int(input("Estação de partida: "))
-        destino = int(input("Estação de destino: "))
+
+        for key, value in num_to_station.items():
+            print(f"{key}: {value}")
+
+        origem = int(input("Estação de partida (em número): "))
+        destino = int(input("Estação de destino (em número): "))
 
         rota = grafo_f[0].calcular_rota(origem-1, destino-1)
         
         if rota:
-            print("Rota: ", end="")
+            print(f"Rota ({len(rota)} estações): ", end="")
             for path in rota:
-                print(f"{path+1}", end="")
+                print(f"{num_to_station[path+1]}", end="")
                 if path == rota[len(rota)-1]:
                     break
                 print(" -> ", end="")
