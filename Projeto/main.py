@@ -105,6 +105,19 @@ def handle_selection(selection: int, grafo_f: List[Grafo]):
         origem = int(input("Estação de partida (em número): "))
         destino = int(input("Estação de destino (em número): "))
 
+        desvios = []
+
+        while True:
+            desvio = int(input("Gostaria de evitar alguma estação? (1 - Sim |2 - Não) "))
+            if desvio == 2:
+                break
+            else:
+                desviar_de = int(input("Digite a estação a ser evitada: "))
+                desvios.append(desviar_de)
+
+        for desvio in desvios:
+            grafo_f[0].removeV(desvio)
+
         rota = grafo_f[0].calcular_rota(origem-1, destino-1)
         
         if rota:
@@ -115,6 +128,14 @@ def handle_selection(selection: int, grafo_f: List[Grafo]):
                     break
                 print(" -> ", end="")
             print()
+        
+        escolha = int(input("Deseja reiniciar o grafo? (1 - Sim |2 - Não) "))
+        if escolha == 1:
+            grafo = create_from_txt('grafo.txt')
+            print("Grafo reiniciado")
+            grafo_f[0] = grafo
+        else:
+            print("Grafo não reiniciado")
 
 
 def main():

@@ -76,12 +76,12 @@ class Grafo:
             self.listaAdj[i] = [edge for edge in self.listaAdj[i] if edge[0] != v]
 
         # Ajustar a lista de adjacência
-        self.listaAdj.pop(v)
-        self.n -= 1
+        # self.listaAdj.pop(v)
+        # self.n -= 1
 
         # Ajustar as arestas restantes
-        for i in range(self.n):
-            self.listaAdj[i] = [(x - 1 if x > v else x, p) for x, p in self.listaAdj[i]]
+        # for i in range(self.n):
+            # self.listaAdj[i] = [(x - 1 if x > v else x, p) for x, p in self.listaAdj[i]]
         
 	# Apresenta o Grafo contendo
 	# número de vértices, arestas
@@ -173,9 +173,9 @@ class Grafo:
 
     def calcular_rota(self, origem, destino):
         # Verifica se os vértices são válidos
-        if origem >= self.n or destino >= self.n:
-            print("Erro: vértices inválidos.")
-            return None
+        # if origem not in self.listaAdj or destino not in self.listaAdj:
+        #     print("Erro: vértices inválidos.")
+        #     return None
 
         # Inicializa a fila para a BFS e o dicionário de predecessores
         fila = deque([origem])
