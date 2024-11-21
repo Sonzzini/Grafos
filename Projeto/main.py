@@ -22,6 +22,7 @@ def presentMenu():
 7 - Mostrar grafo
 8 - Mostrar conexão do grafo e o reduzido
 9 - Encerrar
+10 - Calcular rota
 ----------------------------------------------""")
 
 def handle_selection(selection: int, grafo_f: List[Grafo]):
@@ -93,6 +94,12 @@ def handle_selection(selection: int, grafo_f: List[Grafo]):
 
     elif selection == 9:
         print("Encerrando o programa...")
+
+    elif selection == 10:
+        origem = str(input("Estação de partida: "))
+        destino = str(input("Estação de destino: "))
+        
+        
 
 
 def main():
